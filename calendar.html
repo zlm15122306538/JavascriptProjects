@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calendar</title>
+
+    <style>
+        body{
+            width:100%;
+            margin:0;padding:0;
+        }
+        #calendar{
+            width:220px;
+            overflow:hidden;
+            background-color: darkgrey;
+            margin:10px auto;
+            padding:0 0 10px 10px;
+            border:1px solid red;
+        }
+        ul{
+            padding:0;
+        }
+
+        #calendar li{
+            color:white;
+            float: left;
+            width:50px;
+            height:50px;
+            cursor:pointer;
+            font-size:16px;
+            text-align:center;
+            background:grey;
+            list-style-type:none;
+            border:1px solid black;
+            margin:10px 10px 0 0;
+            padding:5px;
+        }
+        #calendar li.current{
+            color:blue;
+            background:white;}
+        #calendar li strong{
+            display:block;
+            font-size:22px;}
+        #show{
+            clear:both;
+            color:blue;
+            background:white;
+            border:1px solid darkgrey;
+            margin:10px 10px 0 0;
+            padding:5px;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="calendar">
+    <ul>
+        <li class="current"><strong>1</strong>JAN</li>
+        <li><strong>2</strong>FER</li>
+        <li><strong>3</strong>MAR</li>
+        <li><strong>4</strong>APR</li>
+        <li><strong>5</strong>MAY</li>
+        <li><strong>6</strong>JUN</li>
+        <li><strong>7</strong>JUL</li>
+        <li><strong>8</strong>AUG</li>
+        <li><strong>9</strong>SEP</li>
+        <li><strong>10</strong>OCT</li>
+        <li><strong>11</strong>NOV</li>
+        <li><strong>12</strong>DEC</li>
+    </ul>
+    <div id="show">
+        <h>
+            <strong>1</strong>月节日
+        </h>
+        <p>元旦放假</p>
+    </div>
+</div>
+<script>
+    window.onload = function ()
+    {
+        var oLi = document.getElementById("calendar").getElementsByTagName("li");
+        var oMsg = document.getElementById("show");
+        var oP = oMsg.getElementsByTagName("p")[0];
+        var oS = oMsg.getElementsByTagName("strong")[0];
+        var oArray = [
+            "元旦",
+            "春节",
+            "妇女节",
+            "清明节",
+            "劳动节",
+            "端午节",
+            "小暑",
+            "七夕节",
+            "中秋节",
+            "国庆节",
+            "立冬",
+            "圣诞"
+        ];
+        for(var i = 0; i < oLi.length; i++)
+        {
+            oLi[i].index = i;
+            oLi[i].onmouseover = function ()
+            {
+                for(var n = 0; n < oLi.length; n++)
+                    oLi[n].className="";
+                    this.className="current";
+                oP.innerHTML = oArray[this.index];
+                oS.innerHTML = this.index + 1;
+            }
+        }
+    }
+
+
+</script>
+
+</body>
+</html>
