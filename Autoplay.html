@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>自动播放幻灯片</title>
+    <style>
+        body {
+            margin:0;
+            background-color: #ff6600;
+        }
+        ul {
+            list-style-type:none;
+        }
+        #box {
+            position: relative;
+            width:350px;
+            height:250px;
+            border:1px solid grey;
+            margin:200px auto;
+        }
+        #box .list li {
+            position:absolute;
+            top:0;
+            left:0;
+            opacity:0;
+            width:350px;
+            height:250px
+        }
+        #box .list img {
+            width:330px;
+            height:230px;
+            padding:10px;
+        }
+        #box .list li.current {
+            opacity:1;
+            }
+        #box .count li.current {
+            opacity:0.5;
+            background:orange;
+        }
+        #box .count{
+            position:absolute;
+            right:2px;
+            bottom:5px;
+        }
+        #box .count li{
+            color:white;
+            float: left;
+            width:20px;
+            height:20px;
+            margin-right:5px;
+            padding:0;
+            overflow:hidden;
+            background:orange;
+            opacity:0.5;
+            border-radius:50%;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function ()
+        {
+            var obox = document.getElementById("box");
+            var oul = document.getElementsByTagName("ul");
+            var oimg = oul[0].getElementsByTagName("li");//图片
+            var onum = oul[1].getElementsByTagName("li");//序号
+            var timer = play = null;
+            var i = index = 0;
+
+            //切换按钮
+            for (i = 0; i < onum.length; i++)
+            {
+                onum[i].index = i;
+                onum[i].onmouseover = function ()
+                {
+                    show(this.index)
+                }
+            }
+
+            //鼠标划过关闭定时器
+            obox.onmouseover = function ()
+            {
+                clearInterval(play)
+            };
+
+            //鼠标离开启动自动播放
+            obox.onmouseout = function ()
+            {
+                autoPlay()
+            };
+
+            //自动播放函数
+            function autoPlay ()
+            {
+                play = setInterval(function () {
+                    index++;
+                    index >= oimg.length && (index = 0);
+                    show(index);
+                },2000);
+            }
+            autoPlay();//应用
+
+            //图片切换, 淡入淡出效果
+            function show ()
+            {
+                var alpha = 0;
+                for (i = 0; i < oimg.length; i++)
+                {
+                    oimg[i].style.opacity = 0;
+                    oimg[i].style.filter = "alpha(opacity=0)";
+                }
+                for (i = 0; i < onum.length; i++)
+                {
+                    onum[i].className="";
+                    onum[index].className = "current";
+                    clearInterval(timer);
+                }
+                timer = setInterval(function () {
+                    alpha += 2;
+                    (alpha >100)&&(alpha==100);
+                    oimg[index].style.opacity = alpha / 100;
+                    oimg[index].style.filter = "alpha(opacity = " + alpha + ")";
+                    alpha == 100&&clearInterval(timer);
+                },50);
+            }
+        };
+    </script>
+</head>
+<body>
+
+<div id="box">
+    <ul class="list">
+        <!--轮播图片-->
+        <li class="current"><img src="img/a.jpg" /></li>
+        <li><img src="img/b.jpg" /></li>
+        <li><img src="img/c.jpg"  /></li>
+        <li><img src="img/d.jpg" /></li>
+    </ul>
+    <ul class="count">
+        <!--序号-->
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+</body>
+</html>
