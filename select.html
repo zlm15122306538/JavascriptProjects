@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select选择器</title>
+
+    <style>
+        body {
+            margin:0;
+            padding:0;
+            background-color: darkslategray;
+        }
+        ul {
+            list-style-type: none;
+            padding:0;
+            margin:0;
+            border:1px solid grey;
+            width:175px;
+            display:none;
+        }
+        .selector{
+
+
+
+        }
+        #box {
+            margin:40px auto;
+            width:250px; position: relative;
+        }
+         a:link{
+            color:snow;
+             background-color: grey;
+             text-decoration:none;
+        }
+        .olink {
+            border:1px solid grey;
+            padding-left:5px;
+            padding-right: 5px;
+            position: absolute;
+            right:10px;
+            top:8px;
+        }
+        form {
+            border:1px solid lightgrey;
+            border-radius: 5px;
+            background-color: lightgrey;
+            padding:8px;
+            width:160px;
+            border:1px solid grey;
+
+        }
+        ul li{
+            color:grey;
+            background-color: lightgrey;
+            border:1px dotted grey;
+        }
+        #formbox {
+            border:1px solid grey;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .hover{
+            background-color: blue;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="box">
+
+    <form><div id="formbox">
+        <span class="selector" >请选择游戏... </span></div>
+    </form>
+    <a href="" class="olink">搜索</a>
+    <ul>
+        <li>你画我猜</li>
+        <li>铠甲勇士</li>
+        <li>变形金刚 </li>
+        <li>求生大作战 </li>
+    </ul>
+</div></div>
+<script>
+    window.onload=function(){
+        var os=document.getElementsByClassName("selector")[0];
+        var oul=document.getElementsByTagName("ul")[0];
+        var oli=document.getElementsByTagName("li");
+        os.onclick=function(){
+            var style = oul.style;
+            style.display = style.display == "block" ? "none" : "block";
+            /*阻止事件冒泡*/
+            (event || window.event).cancelBubble = true
+        }
+        document.onclick=function(){
+            oul.style.display="none";
+        }
+
+       for (i = 0; i < oli.length; i++)
+        {
+            //鼠标划过
+            oli[i].onmouseover = function ()
+            {
+                this.className = "hover"
+            };
+            //鼠标离开
+            oli[i].onmouseout = function ()
+            {
+                this.className = "";
+            };
+            //鼠标点击
+            oli[i].onclick = function ()
+            {
+                os.innerHTML = this.innerHTML
+            }
+        }
+    }
+</script>
+</body>
+</html>
