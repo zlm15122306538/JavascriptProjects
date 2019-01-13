@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制属性</title>
+    <style>
+        #container {
+            margin:10px auto;
+            text-align:center;
+            width:600px;height:400px;
+            border:1px solid grey;
+        }
+        #box {
+            width:100px;
+            height:100px;
+            background-color: blue;
+            margin:20px auto;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="box"></div>
+    <button>变长</button>
+    <button>变高</button>
+    <button>变色</button>
+    <button>重置</button>
+</div>
+<script>
+
+        function changestyle(b,attr,val){
+            b.style[attr]=val;};
+        window.onload=function() {
+            var obutton=document.getElementsByTagName("button");
+            var obox=document.getElementById("box");
+            var ostyle=["width","height","background-color","cssText"];
+            var ovalue=["200px","200px","red",""];
+
+            for(var i=0;i<obutton.length;i++){
+                obutton[i].index=i;
+                obutton[i].onclick=function(){
+                    changestyle(obox,ostyle[this.index],ovalue[this.index]);}
+        }
+        }
+</script>
+</body>
+</html>
