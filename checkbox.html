@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复选框全选与全不选</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style type="text/css">
+        body{
+            width:100%;
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:150px;
+            margin:50px auto;
+            border:1px solid black;
+            background-color: cornflowerblue;
+        }
+        dl{
+            margin:10px auto;
+        }
+        dt{
+
+            border-bottom: 1px solid grey;
+        }
+        dd{
+            padding:0;
+            margin:0;
+        }
+        label{padding:5px;}
+    </style>
+</head>
+<body>
+<div id="box">
+    <dl>
+        <dt><input type="checkbox"><label>全选</label><a href="#">反选</a></dt>
+        <dd>
+            <p><input type="checkbox"><label>选项一</label></p>
+            <p><input type="checkbox"><label>选项二</label></p>
+            <p><input type="checkbox"><label>选项三</label></p>
+            <p><input type="checkbox"><label>选项四</label></p>
+            <p><input type="checkbox"><label>选项五</label></p>
+            <p><input type="checkbox"><label>选项六</label></p>
+        </dd>
+    </dl>
+</div>
+<script>
+    window.onload=function() {
+        var oin = document.getElementsByTagName("input");
+        var oa = document.getElementsByTagName("a")[0];
+        var ola = document.getElementsByTagName("label")[0];
+        oa.onclick = function () {
+            for (var i = 0; i < oin.length; i++) {
+                oin[i].checked = !oin[i].checked;
+            }
+            issall();
+        };
+        var isall = function () {
+            ola.innerHTML = oin[0].checked ? "全不选":"全选";
+        };
+
+        for (var i = 0; i < oin.length; i++) {
+            oin[i].onclick = function () {
+                isall();
+            }
+        }
+        oin[0].onclick=function () {
+            for(var i=0;i<oin.length;i++){oin[i].checked=this.checked;}
+            isall();
+        }
+    }
+
+</script>
+</body>
+</html>
